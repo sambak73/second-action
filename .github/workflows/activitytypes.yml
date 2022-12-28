@@ -1,0 +1,11 @@
+name: pull request with activity types
+on:
+  pull_request:
+    types:
+      - opened
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: message
+        run: echo "Thanks for pull request"      
