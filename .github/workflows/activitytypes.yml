@@ -3,9 +3,17 @@ on:
   pull_request:
     types:
       - opened
+    branches:
+      - main
+  push:
+    branches:
+      - main
+      - dev
+    paths-ignore:
+      - '.github/workflows/*'
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: message
-        run: echo "Thanks for pull request"      
+        run: echo "Thanks for push / pull request"      
