@@ -1,0 +1,43 @@
+name: get build data
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name:  get code
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - name: test code
+        run: npm run test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - name: build code
+        run: npm run build
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3  
+        with:
+          name: dist-files
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+          path: dist
+      - name: display contents of artifact
+        run: ls dist/
+      - name: final step
+        run: echo "Artifacts are ready"      
