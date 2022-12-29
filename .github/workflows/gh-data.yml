@@ -3,8 +3,12 @@ on:
   push:
     branches:
       - master
+env:
+  WORKFLOW_NAME: 'build data'      
 jobs:
   test:
+    env:
+      JOB_NAME: test
     runs-on: ubuntu-latest
     steps:
       - name:  get code
@@ -57,4 +61,7 @@ jobs:
       - name: display contents of artifact
         run: ls dist/
       - name: final step
-        run: echo "Artifacts are ready"      
+        run: |
+          echo "Artifacts are ready"      
+          echo ${{ env.JOB_NAME }}
+          echo ${{ env.WORKFLOW_NAME }}
