@@ -23,7 +23,7 @@ jobs:
       - name: test code
         run: npm run test
       - name: Before build
-        run: ${{ env.JOb_NAME }}
+        run: ${{ env.JOB_NAME }}
   build:
     needs: test
     runs-on: ubuntu-latest
