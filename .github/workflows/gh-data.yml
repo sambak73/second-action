@@ -7,6 +7,7 @@ env:
   WORKFLOW_NAME: 'build data'      
 jobs:
   test:
+    environment: test
     env:
       JOB_NAME: test
     runs-on: ubuntu-latest
@@ -23,7 +24,9 @@ jobs:
       - name: test code
         run: npm run test
       - name: Before build
-        run: echo ${{ env.JOB_NAME }}
+        run: |
+          echo ${{ env.JOB_NAME }}
+          echo ${{ secrets.ENV_NAME }}
   build:
     needs: test
     runs-on: ubuntu-latest
