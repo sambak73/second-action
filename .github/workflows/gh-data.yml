@@ -22,6 +22,8 @@ jobs:
         run: npm ci
       - name: test code
         run: npm run test
+      - name: Before build
+        run: ${{ env.JOb_NAME }}
   build:
     needs: test
     runs-on: ubuntu-latest
